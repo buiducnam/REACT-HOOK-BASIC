@@ -4,6 +4,7 @@ import './App.scss';
 // import TodoForm from './components/TodoForm/TodoForm';
 import PostList from './components/PostList/PostList';
 import Pagination from './components/Pagination/Pagination';
+import Search from './components/Search/Search';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import queryString from 'query-string';
@@ -23,7 +24,8 @@ function App() {
 
   const [filter, setFilter] = useState({
     _limit: 10,
-    _page: 1
+    _page: 1,
+    title_like: ''
   });
 
   useEffect(() => {
@@ -72,8 +74,17 @@ function App() {
     });
   }
 
+  const onChangeSearchTerm = (formValue) => {
+    setFilter({
+      ...filter,
+      _page: 1,
+      title_like: formValue.searchTerm
+    });
+  }
+
   return (
     <div className="App">
+      <Search onSearch={onChangeSearchTerm} />
       <PostList posts={posts} />
       <Pagination pagination={paginations} onChangePage={onChangePage} />
       {/* <ColorBox /> */}
