@@ -5,6 +5,7 @@ import './App.scss';
 import PostList from './components/PostList/PostList';
 import Pagination from './components/Pagination/Pagination';
 import Search from './components/Search/Search';
+import Clock from './components/Clock/Clock';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import queryString from 'query-string';
@@ -82,11 +83,14 @@ function App() {
     });
   }
 
+  const [showClock, setShowClock] = useState(true);
   return (
     <div className="App">
-      <Search onSearch={onChangeSearchTerm} />
+      {showClock && <Clock />}
+      <button onClick={() => setShowClock(false)}>Hide Clock</button>
+      {/* <Search onSearch={onChangeSearchTerm} />
       <PostList posts={posts} />
-      <Pagination pagination={paginations} onChangePage={onChangePage} />
+      <Pagination pagination={paginations} onChangePage={onChangePage} /> */}
       {/* <ColorBox /> */}
       {/* <TodoForm onSubmit={onHandleSubmit} />
       <TodoList todos={todos} onTodoClick={onRemoveItem} /> */}
